@@ -1,0 +1,15 @@
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\bin\Debug\net8.0\Infrastructure.deps.json
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\bin\Debug\net8.0\Infrastructure.dll
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\bin\Debug\net8.0\Infrastructure.pdb
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\bin\Debug\net8.0\Core.dll
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\bin\Debug\net8.0\Core.pdb
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\Infrastructure.AssemblyInfo.cs
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\Infrastructure.csproj.CopyComplete
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\Infrastructure.dll
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\refint\Infrastructure.dll
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\Infrastructure.pdb
+C:\Users\Desarrollo Rp3\OneDrive - RP3 Retail Software POS 3\Desktop\Partners\Infrastructure\obj\Debug\net8.0\ref\Infrastructure.dll
