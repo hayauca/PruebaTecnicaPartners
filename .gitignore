@@ -1,0 +1,15 @@
+# Ignorar carpetas de compilación
+bin/
+obj/
+
+# Ignorar archivos específicos generados por el proyecto
+*.suo
+*.cache
+*.targets
+*.dg.spec.json
+
+# Ignorar configuración de paquetes y demás
+project.assets.json
+project.nuget.cache
+
+.vs/
