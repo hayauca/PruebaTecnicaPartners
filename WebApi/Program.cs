@@ -4,12 +4,25 @@ using Infrastructure.Repositorios;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.Text;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+// Configuración de Serilog hac
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console() // Configura para escribir en la consola hac
+    .WriteTo.File("logs/myapp.txt", rollingInterval: RollingInterval.Day) // Configura para escribir en un archivo hac
+    .CreateLogger();
+
+// Añadir Serilog al logging de la aplicación 
+builder.Logging.ClearProviders(); // Limpiar los proveedores de log predeterminados hac
+builder.Logging.AddSerilog(); // Agregar Serilog al pipeline de logging hac
+
+
 
 // Configuración JWT hac
 var jwtKey = builder.Configuration["Jwt:Key"] ?? "ClaveSecretaSuperSegura1234567899999999"; // Cambia esto por una clave secreta más segura
@@ -119,6 +132,13 @@ builder.Services.AddCors(options =>
 
 
 var app = builder.Build();
+
+
+// Usa Serilog en tu aplicación
+app.MapGet("/", () => "Hello World!"); //hac
+
+// Cerrar loggers cuando la aplicación termine
+app.Lifetime.ApplicationStopped.Register(Log.CloseAndFlush); //hac
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

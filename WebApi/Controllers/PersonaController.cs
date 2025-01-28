@@ -3,6 +3,7 @@ using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace WebApi.Controllers
 {
@@ -23,9 +24,19 @@ namespace WebApi.Controllers
         public async Task<IActionResult> GetPersonas()
         {
 
-            var personas = await _personaService.GetPersonasAsync();
+            try
+            {
+                var personas = await _personaService.GetPersonasAsync();
 
-            return Ok(personas);
+                return Ok(personas);
+            }
+            catch (Exception ex)
+            {
+
+                Log.Error(ex, "Ocurrió un error al obtener las personas.");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+                   
         }
 
         [Authorize]
@@ -35,8 +46,17 @@ namespace WebApi.Controllers
         public async Task<IActionResult> CrearPersona([FromBody] Persona request)
         {
 
-            var respuesta = await _personaService.CrearPersonaAsync(request);
-            return Ok(new { message = "Datos grabados correctamente." });
+            try
+            {
+                var respuesta = await _personaService.CrearPersonaAsync(request);
+                return Ok(new { message = "Datos grabados correctamente." });
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Ocurrió un error al crear persona.");
+                return StatusCode(500, "Error interno del servidor.");
+            }
 
         }
 
@@ -46,8 +66,18 @@ namespace WebApi.Controllers
 
         public async Task<IActionResult> EditarPersona([FromBody] Persona request)
         {
-            var respuesta = await _personaService.EditarPersonaAsync(request);
-            return Ok(new { message = "Datos actualizados correctamente." });
+            try
+            {
+                var respuesta = await _personaService.EditarPersonaAsync(request);
+                return Ok(new { message = "Datos actualizados correctamente." });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Ocurrió un error al editar persona.");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+            
+         
 
         }
 
@@ -57,9 +87,17 @@ namespace WebApi.Controllers
     
        public async Task<IActionResult> EliminarPersona(int id)
         {
-          
-            var respuesta = await _personaService.EliminarPersonaAsync(id);
-            return Ok(new { message = "Datos eliminados correctamente." });
+            try
+            {
+                var respuesta = await _personaService.EliminarPersonaAsync(id);
+                return Ok(new { message = "Datos eliminados correctamente." });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Ocurrió un error al eliminar persona.");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+                    
 
         }
 

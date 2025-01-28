@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -29,26 +30,35 @@ namespace WebApi.Controllers
         [Route("api/token")]
         public async Task<IActionResult> Login([FromBody] Login login)
         {
-          
-            if (!String.IsNullOrEmpty(login.usuario)  && !String.IsNullOrEmpty(login.password))
+
+            try
             {
-
-                var respuesta = await _usuarioService.GetUsuarioAsync(login.usuario);
-              
-
-                if(respuesta)
+                if (!String.IsNullOrEmpty(login.usuario) && !String.IsNullOrEmpty(login.password))
                 {
-                    var token = GenerateJwtToken(login.usuario);
-                    return Ok(new { token });
+
+                    var respuesta = await _usuarioService.GetUsuarioAsync(login.usuario);
+
+
+                    if (respuesta)
+                    {
+                        var token = GenerateJwtToken(login.usuario);
+                        return Ok(new { token });
+                    }
+                    else
+                    {
+                        return Unauthorized("Usuario no Existe.");
+
+                    }
                 }
-                else
-                {
-                    return Unauthorized("Usuario no Existe.");
 
-                }             
+                return Unauthorized("Credenciales inválidas.");
             }
-
-            return Unauthorized("Credenciales inválidas.");
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Ocurrió un error al obtener el usuario.");
+                throw;
+            }
+                 
         }
 
         private string GenerateJwtToken(string username)
@@ -80,8 +90,9 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-
+                Log.Error(ex, "Ocurrió un error al generar el token.");
                 throw;
+
             }
             
         }

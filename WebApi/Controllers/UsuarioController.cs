@@ -3,6 +3,7 @@ using Core.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Serilog;
 
 namespace WebApi.Controllers
 {
@@ -22,10 +23,20 @@ namespace WebApi.Controllers
 
         public async Task<IActionResult> GetUsuarios()
         {
-            var usuarios = await _usuarioService.GetUsuariosAsync();
+            try
+            {
+                var usuarios = await _usuarioService.GetUsuariosAsync();
+                return Ok(usuarios);
+            }
+            catch (Exception ex)
+            {
+
+                Log.Error(ex, "Ocurrió un error al obtener los usuarios.");
+                return StatusCode(500, "Error interno del servidor.");
+            }
 
 
-            return Ok(usuarios);
+           
         }
 
         [Authorize]
@@ -34,9 +45,17 @@ namespace WebApi.Controllers
 
         public async Task<IActionResult> CrearUsuario([FromBody] Usuario request)
         {
+            try
+            {
+                var respuesta = await _usuarioService.CrearUsuarioAsync(request);
+                return Ok(new { message = "Datos grabados correctamente." });
+            }
+            catch (Exception ex)
+            {
 
-            var respuesta = await _usuarioService.CrearUsuarioAsync(request);
-            return Ok(new { message = "Datos grabados correctamente." });
+                Log.Error(ex, "Ocurrió un error al crear usuario.");
+                return StatusCode(500, "Error interno del servidor.");
+            }
 
         }
 
@@ -46,11 +65,16 @@ namespace WebApi.Controllers
 
         public async Task<IActionResult> GetUsuario(string usuario)
         {
-
-            var respuesta = await _usuarioService.GetUsuarioAsync(usuario);
-            return Ok(new { message = "Usuario Existe" });
-
-
+            try
+            {
+                var respuesta = await _usuarioService.GetUsuarioAsync(usuario);
+                return Ok(new { message = "Usuario Existe" });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Ocurrió un error al buscar usuario.");
+                return StatusCode(500, "Error interno del servidor.");
+            }
         }
 
         [Authorize]
@@ -58,10 +82,18 @@ namespace WebApi.Controllers
         [Route("api/usuario/editarusuario")]
         public async Task<IActionResult> EditarUsuario([FromBody] Usuario request)
         {
-            var respuesta = await _usuarioService.EditarUsuarioAsync(request);
-            return Ok(new { message = "Datos actualizados correctamente." });
+            try
+            {
+                var respuesta = await _usuarioService.EditarUsuarioAsync(request);
+                return Ok(new { message = "Datos actualizados correctamente." });
+            }
+            catch (Exception ex)
+            {
 
-
+                Log.Error(ex, "Ocurrió un error al editar usuario.");
+                return StatusCode(500, "Error interno del servidor.");
+            }
+            
         }
 
         [Authorize]
@@ -70,10 +102,16 @@ namespace WebApi.Controllers
 
         public async Task<IActionResult> EliminarUsuario(int id)
         {
-
-            var respuesta = await _usuarioService.EliminarUsuarioAsync(id);
-            return Ok(new { message = "Datos eliminados correctamente." });
-
+            try
+            {
+                var respuesta = await _usuarioService.EliminarUsuarioAsync(id);
+                return Ok(new { message = "Datos eliminados correctamente." });
+            }
+            catch (Exception ex)
+            {
+                Log.Error(ex, "Ocurrió un error al eliminar el usuario.");
+                return StatusCode(500, "Error interno del servidor.");
+            }
 
         }
     }
